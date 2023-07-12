@@ -19,6 +19,12 @@ let TodosController = class TodosController {
     async getTodos() {
         return { success: true };
     }
+    async addTodo() {
+        return { success: true };
+    }
+    async deleteTodo() {
+        return { success: true };
+    }
 };
 __decorate([
     (0, common_1.Get)('/'),
@@ -26,6 +32,18 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], TodosController.prototype, "getTodos", null);
+__decorate([
+    (0, common_1.Post)('/'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], TodosController.prototype, "addTodo", null);
+__decorate([
+    (0, common_1.Delete)('/:id'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], TodosController.prototype, "deleteTodo", null);
 TodosController = __decorate([
     (0, common_1.Controller)('todos'),
     __metadata("design:paramtypes", [todos_service_1.TodosService])

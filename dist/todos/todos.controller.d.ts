@@ -5,4 +5,10 @@ export declare class TodosController {
     getTodos(): Promise<{
         success: boolean;
     }>;
+    addTodo(): Promise<{
+        success: boolean;
+    }>;
+    deleteTodo(): Promise<{
+        success: boolean;
+    }>;
 }

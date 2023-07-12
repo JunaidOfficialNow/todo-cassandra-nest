@@ -6,20 +6,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.CassandraService = void 0;
 const common_1 = require("@nestjs/common");
-const app_controller_1 = require("./app.controller");
-const app_service_1 = require("./app.service");
-const todos_module_1 = require("./todos/todos.module");
-const cassandra_service_1 = require("./cassandra/cassandra.service");
-let AppModule = class AppModule {
+const cassandra_driver_1 = require("cassandra-driver");
+let CassandraService = class CassandraService {
+    async onModuleInit() {
+        this.client = new cassandra_driver_1.Client({
+            contactPoints: ['localhost'],
+            keyspace: 'your_keyspace',
+            localDataCenter: 'datacenter1'
+        });
+        await this.client.connect();
+    }
+    getClient() {
+        return this.client;
+    }
 };
-AppModule = __decorate([
-    (0, common_1.Module)({
-        imports: [todos_module_1.TodosModule],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService, cassandra_service_1.CassandraService],
-    })
-], AppModule);
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+CassandraService = __decorate([
+    (0, common_1.Injectable)()
+], CassandraService);
+exports.CassandraService = CassandraService;
+//# sourceMappingURL=cassandra.service.js.map
