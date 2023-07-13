@@ -3,7 +3,7 @@ export declare class TodosController {
     private todosService;
     constructor(todosService: TodosService);
     getTodos(): Promise<{
-        success: boolean;
+        todos: void;
     }>;
     addTodo(): Promise<{
         success: boolean;

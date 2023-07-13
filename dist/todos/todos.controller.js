@@ -17,7 +17,8 @@ let TodosController = class TodosController {
         this.todosService = todosService;
     }
     async getTodos() {
-        return { success: true };
+        const todos = await this.todosService.getTodos();
+        return { todos };
     }
     async addTodo() {
         return { success: true };

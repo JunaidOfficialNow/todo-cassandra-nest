@@ -6,7 +6,8 @@ export class TodosController {
   constructor(private todosService: TodosService) {}
   @Get('/')
   async getTodos() {
-    return { success: true };
+    const todos = await this.todosService.getTodos();
+    return { todos };
   }
 
   @Post('/')

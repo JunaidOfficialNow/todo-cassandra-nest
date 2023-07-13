@@ -10,12 +10,15 @@ exports.TodosModule = void 0;
 const common_1 = require("@nestjs/common");
 const todos_controller_1 = require("./todos.controller");
 const todos_service_1 = require("./todos.service");
+const todos_repository_1 = require("./todos.repository");
+const cassandra_module_1 = require("../cassandra/cassandra.module");
 let TodosModule = class TodosModule {
 };
 TodosModule = __decorate([
     (0, common_1.Module)({
+        imports: [cassandra_module_1.CassandraModule],
         controllers: [todos_controller_1.TodosController],
-        providers: [todos_service_1.TodosService],
+        providers: [todos_service_1.TodosService, todos_repository_1.TodoRepository],
     })
 ], TodosModule);
 exports.TodosModule = TodosModule;

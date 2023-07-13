@@ -9,19 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TodosService = void 0;
+exports.Cassandra = void 0;
 const common_1 = require("@nestjs/common");
-const todos_repository_1 = require("./todos.repository");
-let TodosService = class TodosService {
-    constructor(todoRepository) {
-        this.todoRepository = todoRepository;
+const cassandra_driver_1 = require("cassandra-driver");
+let Cassandra = class Cassandra {
+    constructor() {
+        this.client = new cassandra_driver_1.Client({
+            contactPoints: ['127.0.0.1'],
+            localDataCenter: 'datacenter1',
+            keyspace: 'your_keyspace',
+        });
+        this.mapper = new cassandra_driver_1.mapping.Mapper(this.client, {
+            models: { Todo: { tables: ['todos'] } },
+        });
     }
-    async getTodos() {
+    async connect() {
+        await this.client.connect();
+    }
+    getClient() {
+        return this.client;
+    }
+    getMapper() {
+        return this.mapper;
     }
 };
-TodosService = __decorate([
+Cassandra = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [todos_repository_1.TodoRepository])
-], TodosService);
-exports.TodosService = TodosService;
-//# sourceMappingURL=todos.service.js.map
+    __metadata("design:paramtypes", [])
+], Cassandra);
+exports.Cassandra = Cassandra;
+//# sourceMappingURL=cassandra.js.map

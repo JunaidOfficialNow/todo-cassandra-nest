@@ -6,24 +6,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CassandraService = void 0;
+exports.CassandraModule = void 0;
 const common_1 = require("@nestjs/common");
-const cassandra_driver_1 = require("cassandra-driver");
-let CassandraService = class CassandraService {
-    async onModuleInit() {
-        this.client = new cassandra_driver_1.Client({
-            contactPoints: ['localhost'],
-            keyspace: 'your_keyspace',
-            localDataCenter: 'datacenter1'
-        });
-        await this.client.connect();
-    }
-    getClient() {
-        return this.client;
-    }
+const cassandra_1 = require("./cassandra");
+let CassandraModule = class CassandraModule {
 };
-CassandraService = __decorate([
-    (0, common_1.Injectable)()
-], CassandraService);
-exports.CassandraService = CassandraService;
-//# sourceMappingURL=cassandra.service.js.map
+CassandraModule = __decorate([
+    (0, common_1.Module)({
+        providers: [cassandra_1.Cassandra],
+        exports: [cassandra_1.Cassandra],
+    })
+], CassandraModule);
+exports.CassandraModule = CassandraModule;
+//# sourceMappingURL=cassandra.module.js.map
